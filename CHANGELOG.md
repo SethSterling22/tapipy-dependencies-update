@@ -1,5 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
+## 1.9.1 - 2025-08-28
+### Added
+- No change.
+
+### Changed
+- 1.9.1 release
+- urllib requirement updated
+- Documentation on poetry shell access updated
+
+### Removed
+- No change.
+
 ## 1.9.0 - 2025-07-07
 ### Added
 - No change.
