@@ -142,9 +142,16 @@ Building is done with poetry as follows:
 pip install poetry
 poetry install
 ```
-This installs `tapipy` to a virtual environment. Run a shell in this environment with:
+This installs `tapipy` to a virtual environment. 
+
+Run a shell in this environment with:
 ```
+poetry self add poetry-plugin-shell
 poetry shell
+```
+Or with 
+```
+poetry env activate
 ```
 
 To install locally (not in a virtual environment):
