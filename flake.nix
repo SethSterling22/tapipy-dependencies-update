@@ -15,6 +15,7 @@
           ps.requests
           ps.pip
           ps.pyaml
+          ps.jwt
           ps.openapi-core
           ps.atomicwrites
         ]);
@@ -30,8 +31,8 @@
           pkgs.libffi # needed for cffi package which is a dependency of something
         ];
 
-        # welcome script package with an optional version parameter
-        tapisWelcome = pkgs.writeScriptBin "welcome" ''
+        # menu script package with an optional version parameter
+        tapisMenu = pkgs.writeScriptBin "menu" ''
           #!${pkgs.bash}/bin/bash
           echo -e "Entering tapipy nix development environment..."
 
@@ -56,14 +57,14 @@
           
 
           echo -e "\nAvailable Makefile commands:
-          ==========================
+          ============================
             - make build: Build the Python package
             - make install: Install the Python package
             - make test: Run tests (in Docker) (must place password in Makefile)
             - make pull_specs: Update OpenAPI specs
           
           Available Python poetry commands:
-          ==========================
+          ============================
             - poetry install: Install dependencies
             - poetry update: Update dependencies
             - poetry env list: List poetry environments
@@ -73,22 +74,28 @@
             - poetry publish --username=__token__ --password=pypi-TOKEN: Publish the package
           
           Common commands:
-          ==========================
-            - welcome: callable from nix shell, shows this help message
-            - welcome --version: shows npm and node version + welcome
+          ============================
+            - menu: callable from nix shell, shows this help message
+            - menu --version: shows npm and node version + menu
             - nix develop -i: --ignore-environment to isolate nix shell from user env
-            - nix develop .#welcome: runs welcome version in nix shell
+            - nix develop .#menu: runs menu version in nix shell
             - nix flake show: to view flake outputs
+
+          To Run Tapipy in Dev Shell:
+          ============================
+            1. Enter shell with: nix develop
+            2. Install tapipy from source with: poetry install
+            3. Enter python repl: python3
           "
         '';
       in {
         devShells = {
           default = pkgs.mkShell {
             packages = commonPackages ++ [
-              tapisWelcome
+              tapisMenu
             ];
             shellHook = ''
-              welcome version
+              menu version
             '';
           help = pkgs.mkShell {
             packages = commonPackages;
